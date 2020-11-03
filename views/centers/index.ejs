@@ -1,0 +1,32 @@
+<%- include ("../partials/header") %>
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1>Welcome to Turista</h1>
+            <p>View our hand-picked Tourist and receation centers from across Nigeria</p>
+            <p>
+                <a class="btn btn-primary btn-large" href="/centers/new"> Create new Tourist center</a>
+            </p>
+        </div>
+    </header>
+
+
+    <div class="row text-center" style="display: flex; flex-wrap: wrap;">
+        <% centers.forEach(function(center){ %>
+            <div class="col-md-3 col-sm-6">               
+                <div class="mb-2 img-fluid rounded float-left img-thumbnail">
+                    <img class="img-fluid float-left" src= "<%= center.image %>" alt="location-picture">
+                    <div class="card-title"><h4><%= center.name %></h4></div>
+                    <p>
+                        <a class="btn btn-primary" href="/centers/<%= center._id %>">More info</a>
+                    </p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+</div>
+
+
+<%- include ("../partials/subfooter") %>
+<%- include ("../partials/footer") %>

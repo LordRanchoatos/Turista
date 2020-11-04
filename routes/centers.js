@@ -31,7 +31,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
             console.log(err)
         } else {
             //redirect to centers page
-            req.flash("error", "Something went wrong! ")
+            req.flash("success", "Center successfully created! ")
             res.redirect("/centers");
         }
     })

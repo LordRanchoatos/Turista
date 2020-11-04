@@ -33,6 +33,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     comment.save();
                     center.comments.push(comment);
                     center.save();
+                    req.flash("success", "Comment successfully added")
                     res.redirect("/centers/" + center._id )
                 }
             });
@@ -57,6 +58,7 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
         if(err){
             res.redirect("back");
         } else {
+            req.flash("success", "comment successfully editted")
             res.redirect("/centers/" + req.params.id);
         }
     })

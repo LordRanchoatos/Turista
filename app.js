@@ -12,7 +12,7 @@ var express     = require("express"),
     session = require('express-session'),
     MemoryStore = require("memorystore")(session),
     seedDB       = require("./seeds"),
-    PORT = 3000 || process.env.PORT
+    PORT = process.env.PORT || 3000 ;
     
     require('dotenv').config();
 

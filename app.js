@@ -22,7 +22,7 @@ var centerRoute = require('./routes/centers'),
 
 
 // "mongodb://localhost/turista"
-mongoose.connect(process.env.DATABASE);
+mongoose.connect(process.env.DATABASE, {useNewUrlParser: true, 'useUnifiedTopology': true, 'useFindAndModify': false, useCreateIndex: true});
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true }));
 app.use(express.static(__dirname + "/public"));

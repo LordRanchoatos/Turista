@@ -9,15 +9,20 @@ var express     = require("express"),
     User                 = require("./models/user"),
     Center         = require("./models/center"),
     Comment = require("./models/comment"),
+    session = require('express-session');
+    MemoryStore = require("express-session")(session);
     seedDB       = require("./seeds");
+    PORT = 3000 || process.env.PORT;
+    
+    require('.dotenv').config();
 
 var centerRoute = require('./routes/centers'),
       commentRoute = require('./routes/comments'),
       indexRoute = require('./routes/index');
 
 
-
-mongoose.connect("mongodb://localhost/turista");
+// "mongodb://localhost/turista"
+mongoose.connect(process.env.DATABASE);
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: true }));
 app.use(express.static(__dirname + "/public"));
@@ -29,11 +34,16 @@ app.use(flash());
 //===================
 //PASSPORT CONFIGURATION
 //===================
-app.use(require("express-session")({
-    secret: "You can do anything if you put your mind to it",
+app.use(session ({
+    cookie: { maxAge: 86400000 },
+    store: new MemoryStore({
+        checkPeriod: 86400000 //prune expired entries every 24h
+}),
+    secret: "happy hacking guys",
     resave: false,
     saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -51,6 +61,6 @@ app.use(indexRoute);
 app.use("/centers", centerRoute);
 app.use( "/centers/:id/comments", commentRoute);
 
-app.listen(3000, function(){
+app.listen(PORT, function(){
     console.log("TURISTA server has started.....")
 });

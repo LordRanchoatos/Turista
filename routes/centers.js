@@ -14,6 +14,9 @@ router.get("/", function(req, res){
 });
 
 
+//password == nyo1FDgcpJl5KKn8
+//  database mongodb+srv://turista:<password>@ranchoatos.p1iml.mongodb.net/<dbname>?retryWrites=true&w=majority
+
 //handles the creation of new center
 router.post("/", middleware.isLoggedIn, function(req, res){
     //get data from form 

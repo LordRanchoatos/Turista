@@ -9,12 +9,12 @@ var express     = require("express"),
     User                 = require("./models/user"),
     Center         = require("./models/center"),
     Comment = require("./models/comment"),
-    session = require('express-session');
-    MemoryStore = require("express-session")(session);
-    seedDB       = require("./seeds");
-    PORT = 3000 || process.env.PORT;
+    session = require('express-session'),
+    MemoryStore = require("memorystore")(session),
+    seedDB       = require("./seeds"),
+    PORT = 3000 || process.env.PORT
     
-    require('.dotenv').config();
+    require('dotenv').config();
 
 var centerRoute = require('./routes/centers'),
       commentRoute = require('./routes/comments'),
